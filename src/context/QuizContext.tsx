@@ -3,14 +3,15 @@ import React, { createContext, Dispatch, useContext, useReducer } from 'react'
 export interface QuizInterface {
   category: string
   correct_answer: string
-  difficulty: string
   incorrect_answers: string[] // [string, string, string]
+  options?: string[] // [string, string, string, string]
+  difficulty: string
   question: string
   type: string
 }
 
 type QuizState = {
-  score: boolean[]
+  score: string[]
   quiz: QuizInterface[]
 }
 
@@ -18,7 +19,7 @@ type QuizAction =
   | { type: 'SET_SCOREBOARD'; count: number }
   | {
       type: 'SET_SCORE'
-      question: number
+      quiz: { number: number; question: string }
     }
   | {
       type: 'SET_QUIZ'
@@ -35,10 +36,11 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
     case 'SET_SCOREBOARD':
       return {
         ...state,
-        score: Array(action.count).fill(false),
+        score: Array(action.count).fill(''),
       }
     case 'SET_SCORE':
-      state.score[action.question - 1] = true
+      state.score[action.quiz.number - 1] = action.quiz.question
+      console.log(state)
       return {
         ...state,
         score: state.score,
@@ -46,7 +48,14 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
     case 'SET_QUIZ':
       return {
         ...state,
-        quiz: action.quiz,
+        quiz: action.quiz.map((quiz) => {
+          return {
+            ...quiz,
+            options: [quiz.correct_answer, ...quiz.incorrect_answers].sort(
+              () => Math.random() - 0.5
+            ),
+          }
+        }),
       }
     default:
       throw new Error('Unhandled action')

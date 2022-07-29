@@ -7,7 +7,6 @@ import { fetchQuiz } from '../helper/api'
 const QUIZ_COUNT = 10
 
 const StartPage = () => {
-  const [loaded, setLoaded] = useState<boolean>(false)
   const dispatch = useQuizDispatch()
   const navigate = useNavigate()
   function handleButtonClick() {
@@ -16,7 +15,6 @@ const StartPage = () => {
       .then((data) => {
         dispatch({ type: 'SET_SCOREBOARD', count: QUIZ_COUNT })
         dispatch({ type: 'SET_QUIZ', quiz: data.results })
-        setLoaded(true)
         navigate('/quiz/1')
       })
   }

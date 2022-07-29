@@ -4,29 +4,30 @@ import Content from '../components/Content'
 import { useQuizState } from '../context/QuizContext'
 
 const QuizPage = () => {
-  const [counter, setCounter] = useState(0)
-  const state = useQuizState()
-
   const { id } = useParams()
+  const { quiz, score } = useQuizState()
   const navigate = useNavigate()
 
   function handleNextButton() {
     if (id) {
-      navigate(`/quiz/${+id + 1}`)
+      if (score[+id - 1] !== '') {
+        // 답을 선택할 때에만 넘길 수 있도록 한다.
+        navigate(`/quiz/${+id + 1}`)
+      }
     }
   }
   return (
     <>
       {id ? (
         <>
-          {+id > state.quiz.length ? (
+          {+id > quiz.length ? (
             // 퀴즈가 끝날 경우
             <Navigate to="/score" />
           ) : (
             // 퀴즈가 진행중인 경우
             <div>
-              <Content quiz={state.quiz[+id - 1]} number={+id} />
-              {/* <button onClick={handleNextButton}>Next</button> */}
+              <Content number={+id} />
+              <button onClick={handleNextButton}>Next</button>
             </div>
           )}
         </>

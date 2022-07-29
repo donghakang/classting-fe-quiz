@@ -1,12 +1,20 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuizState } from '../context/QuizContext'
+import { QuizInterface, useQuizState } from '../context/QuizContext'
+import { scoreboard } from '../helper/score'
 
 const ScorePage = () => {
-  const state = useQuizState()
+  const { quiz, score } = useQuizState()
+  const counter = scoreboard(
+    quiz.map((answer: QuizInterface) => answer.correct_answer),
+    score
+  )
 
-  console.log(state)
-  return <div>ScorePage</div>
+  return (
+    <div>
+      {counter}/{score.length}
+    </div>
+  )
 }
 
 export default ScorePage
