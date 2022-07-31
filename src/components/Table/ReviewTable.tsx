@@ -20,11 +20,23 @@ const ReviewTable: React.FC<ReviewTableProps> = ({ answer, quiz }) => {
       </tr>
       {quiz.map((question: QuizInterface, idx: number) => (
         <tr key={idx}>
-          <td>{idx + 1}</td>
+          <td className="center">{idx + 1}</td>
           <td>{answer[idx]}</td>
           <td>{question.correct_answer}</td>
-          <td>{answer[idx] === question.correct_answer ? 'O' : 'X'}</td>
-          <td>{question.difficulty}</td>
+          <td className={`center`}>
+            <span
+              className={`is-correct ${
+                answer[idx] === question.correct_answer ? 'O' : 'X'
+              }`}
+            >
+              {answer[idx] === question.correct_answer ? 'O' : 'X'}
+            </span>
+          </td>
+          <td className={`center`}>
+            <span className={`level ${question.difficulty}`}>
+              {question.difficulty}
+            </span>
+          </td>
           <td>{question.category}</td>
         </tr>
       ))}

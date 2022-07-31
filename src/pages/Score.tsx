@@ -9,6 +9,8 @@ import {
 } from '../context/QuizContext'
 import { numberToTime, scoreboard } from '../helper/score'
 import Table from '../components/Table'
+import { RegularButton } from '../components/Button'
+import * as S from './style'
 
 const ScorePage = () => {
   const { quiz, score, time } = useQuizState()
@@ -38,18 +40,49 @@ const ScorePage = () => {
   return (
     <>
       {quiz.length > 0 ? (
-        <div>
-          {counter}/{score.length}
-          <div>{numberToTime(finishTime)}</div>
-          <Graph correct={counter} incorrect={score.length - counter} />
-          <div>정답: {counter}개</div>
-          <div>오답: {score.length - counter}개</div>
-          <button onClick={handleRestart}>다시 풀기</button>
-          <button onClick={handleReview}>오답 노트</button>
+        <S.Score>
+          <div className="score-container">
+            <div className="info-container">
+              <table className="info-table">
+                <tr>
+                  <th className="report-title" colSpan={2}>
+                    Report
+                  </th>
+                </tr>
+                <tr>
+                  <th>총 문제 수</th>
+                  <td>{score.length}</td>
+                </tr>
+                <tr>
+                  <th>정답 수</th>
+                  <td>{counter}개</td>
+                </tr>
+                <tr>
+                  <th>오답 수</th>
+                  <td>{score.length - counter}개</td>
+                </tr>
+                <tr>
+                  <th>시간</th>
+                  <td>{numberToTime(finishTime)}</td>
+                </tr>
+              </table>
+              <div className="graph-wrapper">
+                <Graph correct={counter} incorrect={score.length - counter} />
+              </div>
+            </div>
+            <div className="button-container">
+              <RegularButton handleClick={handleRestart}>
+                다시 풀기
+              </RegularButton>
+              <RegularButton handleClick={handleReview}>
+                오답 노트
+              </RegularButton>
+            </div>
+          </div>
           <Modal opened={isReview} setOpened={setIsReview}>
             <Table answer={score} quiz={quiz} />
           </Modal>
-        </div>
+        </S.Score>
       ) : (
         // 만약 quiz 가 시작되지 않았더라면, 첫화면으로 이동시킨다.
         <Navigate to="/start" />

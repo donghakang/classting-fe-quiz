@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { StartButton } from '../components/Button'
 import { useQuizDispatch } from '../context/QuizContext'
 import { fetchQuiz } from '../helper/api'
-
+import * as S from './style'
 const QUIZ_COUNT = 10
 
 const StartPage = () => {
@@ -19,9 +19,9 @@ const StartPage = () => {
       })
   }
   return (
-    <div>
+    <S.Start>
       <StartButton handleClick={handleButtonClick}>퀴즈 풀기</StartButton>
-    </div>
+    </S.Start>
   )
 }
 

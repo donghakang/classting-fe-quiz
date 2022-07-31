@@ -46,7 +46,6 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
       }
     case 'SET_SCORE':
       state.score[action.quiz.number - 1] = action.quiz.question
-      console.log(state)
       return {
         ...state,
         score: state.score,

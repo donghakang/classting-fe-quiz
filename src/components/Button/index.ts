@@ -1,3 +1,3 @@
-import { StartButton } from './Button'
+import { StartButton, NextButton, RegularButton } from './Button'
 
-export { StartButton }
+export { StartButton, NextButton, RegularButton }

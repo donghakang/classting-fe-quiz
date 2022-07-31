@@ -14,10 +14,10 @@ export const Modal = styled.div`
   align-items: center;
 
   .modal-content {
-    width: 60%;
-    height: 70%;
+    max-width: 90%;
     background-color: #ffffff;
     border-radius: 8px;
     padding: 1rem;
+    overflow: auto;
   }
 `

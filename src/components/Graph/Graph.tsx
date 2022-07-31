@@ -1,6 +1,7 @@
 import React from 'react'
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js'
 import { Doughnut } from 'react-chartjs-2'
+import theme from '../../styles/theme'
 
 Chart.register(ArcElement, Tooltip, Legend)
 
@@ -11,15 +12,12 @@ interface GraphProps {
 
 const Graph: React.FC<GraphProps> = ({ correct, incorrect }) => {
   const data = {
-    labels: ['Correct', 'Incorrect'],
+    labels: ['정답', '오답'],
     datasets: [
       {
         label: 'Final Result',
         data: [correct, incorrect],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-        ],
+        backgroundColor: [theme.colors.green[500], theme.colors.red[100]],
       },
     ],
   }

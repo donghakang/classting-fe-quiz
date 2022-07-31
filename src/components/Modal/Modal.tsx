@@ -10,7 +10,7 @@ const Modal: React.FC<ModalProps> = ({ opened, children, setOpened }) => {
   return (
     <>
       {opened && (
-        <S.Modal>
+        <S.Modal onClick={() => setOpened(false)}>
           <div className="modal-content" onClick={() => setOpened(false)}>
             {children}
           </div>

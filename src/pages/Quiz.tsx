@@ -1,6 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Navigate } from 'react-router-dom'
+import { NextButton } from '../components/Button'
+import Radio from '../components/Radio'
 import { useQuizDispatch, useQuizState } from '../context/QuizContext'
+import * as S from './style'
 
 const QuizPage = () => {
   // const { id } = useParams()
@@ -16,7 +19,6 @@ const QuizPage = () => {
   const [counter, setCounter] = useState<number>(1)
   // 현재 퀴즈
   const currentQuiz = quiz[counter - 1]
-  console.log('!@#', currentQuiz)
 
   function handleRadioButton(e: React.ChangeEvent<HTMLInputElement>) {
     setSelected(true)
@@ -51,50 +53,60 @@ const QuizPage = () => {
         <Navigate to="/score" />
       ) : (
         // 퀴즈가 진행중인 경우
-        <div>
-          <div>
-            <div
+        <S.Quiz>
+          <div className="quiz-content">
+            <h2
               className="quiz-title"
-              dangerouslySetInnerHTML={{ __html: `${currentQuiz.question}` }}
-            ></div>
-            <div>
+              dangerouslySetInnerHTML={{
+                __html: `Q. ${counter} &nbsp; ${currentQuiz.question}`,
+              }}
+            ></h2>
+            <div className="quiz-options">
               {currentQuiz !== undefined &&
                 currentQuiz.options?.map((option: string, idx: number) => (
-                  <label key={idx}>
-                    <input
-                      type="radio"
-                      id={option}
-                      name="quiz"
-                      value={option}
-                      checked={score[counter - 1] === option}
-                      // 한 번 선택하면 답안지를 보여주기 때문에 conditional
-                      onChange={!selected ? handleRadioButton : undefined}
-                    />
-                    <span
-                      className={`quiz-title ${
-                        isCorrect(
-                          option,
-                          currentQuiz.correct_answer,
-                          score[counter - 1]
-                        ) && 'correct'
-                      } ${
-                        !isCorrect(
-                          option,
-                          currentQuiz.correct_answer,
-                          score[counter - 1]
-                        ) &&
-                        option === currentQuiz.correct_answer &&
-                        'real-answer'
-                      }`}
-                      dangerouslySetInnerHTML={{ __html: `${option}` }}
-                    />
-                    <br />
-                  </label>
+                  <Radio
+                    key={idx}
+                    id={option}
+                    name="quiz"
+                    value={option}
+                    checked={score[counter - 1] === option}
+                    // 한 번 선택하면 답안지를 보여주기 때문에 conditional
+                    handleChange={!selected ? handleRadioButton : undefined}
+                    className={`quiz-title ${
+                      selected &&
+                      isCorrect(
+                        option,
+                        currentQuiz.correct_answer,
+                        score[counter - 1]
+                      ) &&
+                      'correct'
+                    } ${
+                      selected &&
+                      !isCorrect(
+                        option,
+                        currentQuiz.correct_answer,
+                        score[counter - 1]
+                      ) &&
+                      option === currentQuiz.correct_answer &&
+                      'real-answer'
+                    }`}
+                  />
                 ))}
             </div>
+            <div className="button-container">
+              {selected && (
+                <>
+                  {score[counter - 1] === currentQuiz.correct_answer ? (
+                    <span className="correct-message">🎉 정답 입니다!!!</span>
+                  ) : (
+                    <span className="incorrect-message">😰 오답 입니다</span>
+                  )}
+                  <NextButton handleClick={handleNextButton}>Next</NextButton>
+                </>
+              )}
+            </div>
           </div>
-          {selected && <button onClick={handleNextButton}>Next</button>}
-        </div>
+        </S.Quiz>
       )}
     </>
   )
