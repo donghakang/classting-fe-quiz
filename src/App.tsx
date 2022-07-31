@@ -15,8 +15,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<StartPage />} />
-            {/* <Route path="/quiz" element={<QuizPage />} /> */}
-            <Route path="/quiz/:id" element={<QuizPage />} />
+            <Route path="/quiz" element={<QuizPage />} />
             <Route path="/score" element={<ScorePage />} />
             <Route path="*" element={<FallbackPage />} />
           </Routes>

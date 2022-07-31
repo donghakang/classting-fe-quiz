@@ -13,6 +13,7 @@ export interface QuizInterface {
 type QuizState = {
   score: string[]
   quiz: QuizInterface[]
+  time: number
 }
 
 type QuizAction =
@@ -25,10 +26,14 @@ type QuizAction =
       type: 'SET_QUIZ'
       quiz: QuizInterface[]
     }
+  | {
+      type: 'RESET_QUIZ'
+    }
 
 const initialState = {
   score: [],
   quiz: [],
+  time: 0,
 }
 
 function reducer(state: QuizState, action: QuizAction): QuizState {
@@ -37,6 +42,7 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
       return {
         ...state,
         score: Array(action.count).fill(''),
+        time: Date.now(),
       }
     case 'SET_SCORE':
       state.score[action.quiz.number - 1] = action.quiz.question
@@ -57,6 +63,8 @@ function reducer(state: QuizState, action: QuizAction): QuizState {
           }
         }),
       }
+    case 'RESET_QUIZ':
+      return { score: [], quiz: [], time: 0 }
     default:
       throw new Error('Unhandled action')
   }

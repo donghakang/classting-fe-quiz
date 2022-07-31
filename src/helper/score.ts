@@ -9,3 +9,12 @@ export function scoreboard(users_answer: string[], real_answer: string[]) {
 
   return counter
 }
+
+// millisecond로 표시 되어있는 숫자를, M분 S초로 보여준다.
+export function numberToTime(number: number) {
+  const time = Math.floor(number / 1000)
+  const minutes = Math.floor(time / 60)
+  const seconds = time - minutes * 60
+
+  return `${minutes}분 ${seconds}초`
+}

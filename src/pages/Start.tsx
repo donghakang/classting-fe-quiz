@@ -15,12 +15,12 @@ const StartPage = () => {
       .then((data) => {
         dispatch({ type: 'SET_SCOREBOARD', count: QUIZ_COUNT })
         dispatch({ type: 'SET_QUIZ', quiz: data.results })
-        navigate('/quiz/1')
+        navigate('/quiz')
       })
   }
   return (
     <div>
-      <StartButton handleClick={handleButtonClick}>Start Quiz</StartButton>
+      <StartButton handleClick={handleButtonClick}>퀴즈 풀기</StartButton>
     </div>
   )
 }
