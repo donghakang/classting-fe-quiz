@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { StartButton } from '../components/Button'
 import { useQuizDispatch } from '../context/QuizContext'
 import { fetchQuiz } from '../helper/api'
