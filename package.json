@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false  && yarn cypress:run",
     "cypress:open": "yarn cypress open",
     "cypress:run": "yarn cypress run",
     "eject": "react-scripts eject",
