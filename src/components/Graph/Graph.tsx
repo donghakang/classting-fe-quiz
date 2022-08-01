@@ -21,7 +21,7 @@ const Graph: React.FC<GraphProps> = ({ correct, incorrect }) => {
       },
     ],
   }
-  return <Doughnut data={data} />
+  return <Doughnut id="doughnut-graph" data={data} />
 }
 
 export default Graph
