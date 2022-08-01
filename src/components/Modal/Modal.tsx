@@ -11,7 +11,11 @@ const Modal: React.FC<ModalProps> = ({ opened, children, setOpened }) => {
     <>
       {opened && (
         <S.Modal onClick={() => setOpened(false)}>
-          <div className="modal-content" onClick={() => setOpened(false)}>
+          <div
+            id="modal"
+            className="modal-content"
+            onClick={() => setOpened(false)}
+          >
             {children}
           </div>
         </S.Modal>

@@ -66,7 +66,7 @@ const QuizPage = () => {
                 currentQuiz.options?.map((option: string, idx: number) => (
                   <Radio
                     key={idx}
-                    id={option}
+                    id={`option-${idx + 1}`}
                     name="quiz"
                     value={option}
                     checked={score[counter - 1] === option}
@@ -97,9 +97,13 @@ const QuizPage = () => {
               {selected && (
                 <>
                   {score[counter - 1] === currentQuiz.correct_answer ? (
-                    <span className="correct-message">🎉 정답 입니다!!!</span>
+                    <span className="message correct-message">
+                      🎉 정답 입니다!!!
+                    </span>
                   ) : (
-                    <span className="incorrect-message">😰 오답 입니다</span>
+                    <span className="message incorrect-message">
+                      😰 오답 입니다
+                    </span>
                   )}
                   <NextButton handleClick={handleNextButton}>Next</NextButton>
                 </>

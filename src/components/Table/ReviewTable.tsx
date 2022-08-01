@@ -9,7 +9,7 @@ interface ReviewTableProps {
 
 const ReviewTable: React.FC<ReviewTableProps> = ({ answer, quiz }) => {
   return (
-    <S.Table>
+    <S.Table id="review-table">
       <tr>
         <th>퀴즈 번호</th>
         <th>답변</th>

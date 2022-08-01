@@ -24,13 +24,13 @@ const ScorePage = () => {
     score
   )
 
-  function handleRestart(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleRestart() {
     // 다시 풀기
     dispatch({ type: 'RESET_QUIZ' })
     navigate('/')
   }
 
-  function handleReview(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleReview() {
     // 오답 노트
     setIsReview(true)
   }
@@ -55,15 +55,17 @@ const ScorePage = () => {
                 </tr>
                 <tr>
                   <th>정답 수</th>
-                  <td>{counter}개</td>
+                  <td data-test-id="correct-count">{counter}개</td>
                 </tr>
                 <tr>
                   <th>오답 수</th>
-                  <td>{score.length - counter}개</td>
+                  <td data-test-id="incorrect-count">
+                    {score.length - counter}개
+                  </td>
                 </tr>
                 <tr>
                   <th>시간</th>
-                  <td>{numberToTime(finishTime)}</td>
+                  <td data-test-id="time-count">{numberToTime(finishTime)}</td>
                 </tr>
               </table>
               <div className="graph-wrapper">

@@ -20,7 +20,9 @@ const StartPage = () => {
   }
   return (
     <S.Start>
-      <StartButton handleClick={handleButtonClick}>퀴즈 풀기</StartButton>
+      <StartButton className="start-button" handleClick={handleButtonClick}>
+        퀴즈 풀기
+      </StartButton>
     </S.Start>
   )
 }
